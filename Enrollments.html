@@ -129,7 +129,76 @@ $(document).ready(function () {
 
 
 <pre class="r"><code>x &lt;- read_rds(&quot;enrollment.rds&quot;) %&gt;%
-  select(course_name , u_grad)</code></pre>
+  filter(! is.na(course_name)) %&gt;%
+  select(course_name , u_grad , course_department , course_title) %&gt;%
+  mutate(nchar = nchar(course_name)) %&gt;%
+  arrange(nchar) %&gt;%
+  slice(1:7)
+
+x %&gt;% kable(caption = &quot;Enrollments&quot;)</code></pre>
+<table>
+<caption>Enrollments</caption>
+<thead>
+<tr class="header">
+<th align="left">course_name</th>
+<th align="right">u_grad</th>
+<th align="left">course_department</th>
+<th align="left">course_title</th>
+<th align="right">nchar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TIME</td>
+<td align="right">0</td>
+<td align="left">Economics</td>
+<td align="left">ECON 3000</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Data</td>
+<td align="right">67</td>
+<td align="left">Government</td>
+<td align="left">GOV 1005</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">GAGA</td>
+<td align="right">19</td>
+<td align="left">Theater, Dance &amp; Media</td>
+<td align="left">TDM 143</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Dutch</td>
+<td align="right">1</td>
+<td align="left">Germanic Languages &amp; Lit</td>
+<td align="left">GERMAN 90R</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Keynes</td>
+<td align="right">8</td>
+<td align="left">Economics</td>
+<td align="left">ECON 1936</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Danish</td>
+<td align="right">7</td>
+<td align="left">Germanic Languages &amp; Lit</td>
+<td align="left">SCAND 90R.A</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Sallust</td>
+<td align="right">0</td>
+<td align="left">Classics, The</td>
+<td align="left">CLASPHIL 237</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
 
 
 
